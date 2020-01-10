@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "es",
+        "target": "es5",
+        "module": "esnext",
+        "declaration": true,
+        "skipLibCheck": true,
+        "jsx": "react",
+        "strict": false,
+        "importHelpers": true,
+        "lib": ["dom", "esnext"],
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
+    },
+    "include": ["src"]
+}
