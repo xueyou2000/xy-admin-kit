@@ -32,3 +32,39 @@ export function distinct<T>(a: T[], b: T[]) {
 
     return result;
 }
+
+/**
+ * 数组取差集
+ * @param arr1
+ * @param arr2
+ * @example differenceSet([1, 2], [3, 4]) => [1, 2, 3, 4]
+ * @example differenceSet([1, 2, 3], [4]) => [1, 2, 4]
+ */
+export function differenceSet<T>(arr1: T[], arr2: T[]) {
+    return arr1.concat(arr2).filter(function (v) {
+        return arr1.indexOf(v) === -1 || arr2.indexOf(v) === -1;
+    });
+}
+
+/**
+ * 数组取交集
+ * @param arr1
+ * @param arr2
+ * @example intersectionSet([1, 2], [3, 1, 4]) => [1]
+ * @example intersectionSet([1, 2], 3, [3, 4]) => [3]
+ */
+export function intersectionSet<T>(arr1: T[], arr2: T[]) {
+    return arr1.filter(function (v) {
+        return arr2.indexOf(v) !== -1; // 利用filter方法来遍历是否有相同的元素
+    });
+}
+
+/**
+ * 数组并集
+ * @param arr1
+ * @param arr2
+ * @example unionSet([1, 2], [3, 1, 4]) => [1, 2, 3, 4]
+ */
+export function unionSet<T>(a: T[], b: T[]) {
+    return a.concat(b.filter((v) => !a.includes(v)));
+}
