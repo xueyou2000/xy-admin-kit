@@ -2,6 +2,7 @@ export * from "./enum/interface";
 export * from "./http/types";
 export * from "./libs/wx-sdk/interface";
 export * from "./security/AuthorizationSessionStorage/types";
+export * from "./cookies";
 
 import AuthorizationSessionStorage from "./security/AuthorizationSessionStorage";
 
@@ -21,5 +22,6 @@ export * from "./utils/injector-utils";
 export * from "./utils/number-utils";
 export * from "./utils/object-utils";
 export * from "./utils/string-utils";
+export * from "./utils/dom-utils";
 
 export { AuthorizationSessionStorage, HttpClientError, HttpClientOptionDefault, RequestOptionDefault, HttpStatusCode, XmlHttpClient, WxSdk, SocktSimple };

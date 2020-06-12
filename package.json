@@ -1,6 +1,6 @@
 {
     "name": "xy-admin-kit",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "开发套件, 包含常用的工具库",
     "typings": "es/index.d.ts",
     "main": "es/index.js",
