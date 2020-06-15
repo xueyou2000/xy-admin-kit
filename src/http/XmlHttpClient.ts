@@ -99,7 +99,8 @@ export default class XmlHttpClient implements HttpClient {
                     reject(HttpClientError.Create(opt, xmlHttp, httpStatusCode));
                 } else {
                     // 执行 响应转换器
-                    let response: Response<T> = { data: tryGetResponse(xmlHttp), status: xmlHttp.status, config: opt, request: xmlHttp };
+                    const isBlob = xmlHttp.responseType == "arraybuffer" || xmlHttp.responseType == "blob";
+                    let response: Response<T> = { data: isBlob ? xmlHttp.response : tryGetResponse(xmlHttp), status: xmlHttp.status, config: opt, request: xmlHttp };
                     if (options.transformResponse) {
                         response = options.transformResponse(response);
                     }

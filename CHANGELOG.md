@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.5 (Mon Jun 15 2020)
+
+-   修复`XmlHttpClient`在响应类型为二进制时试图转 json 引发的异常
+
 ## 0.0.4 (Fri Jun 12 2020)
 
 -   增加`clipboard`拷贝文本
