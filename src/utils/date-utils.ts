@@ -68,3 +68,43 @@ export function dayRange(date?: Date) {
     const ymd = formateDate(d, "yyyy-MM-dd");
     return [`${ymd} 00:00:00`, `${ymd} 23:59:59`];
 }
+
+/**
+ * 时间差
+ * @description 当前时间与截止时间的时间差字符串
+ * @param endDate 截止时间
+ */
+export function timeDifference(endDate: Date, format = "HH:mm:ss") {
+    // 当前时间
+    const now = new Date().getTime();
+    // 截止时间
+    const end = endDate.getTime();
+    // 时间差
+    const differTime = end - now;
+
+    const tf = function (i: number) {
+        return (i < 10 ? "0" : "") + i;
+    };
+
+    var h = 0,
+        m = 0,
+        s = 0;
+    if (differTime >= 0) {
+        h = Math.floor(differTime / 1000 / 60 / 60);
+        m = Math.floor((differTime / 1000 / 60) % 60);
+        s = Math.floor((differTime / 1000) % 60);
+    }
+
+    return format.replace(/HH|mm|ss/g, (token) => {
+        switch (token) {
+            case "HH":
+                return tf(h);
+            case "mm":
+                return tf(m);
+            case "ss":
+                return tf(s);
+            default:
+                return "";
+        }
+    });
+}
