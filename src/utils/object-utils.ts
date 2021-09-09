@@ -5,14 +5,14 @@
  * @param children
  */
 export function flat<T = any>(data: T[], key: string, children: string) {
-    let keys: { [key: string]: T } = {};
-    data.forEach((item) => {
-        keys[item[key]] = { ...item };
-        if (item[children] && item[children].length > 0) {
-            keys = { ...keys, ...flat(item[children], key, children) };
-        }
-    });
-    return keys;
+  let keys: { [key: string]: T } = {};
+  data.forEach((item) => {
+    keys[item[key]] = { ...item };
+    if (item[children] && item[children].length > 0) {
+      keys = { ...keys, ...flat(item[children], key, children) };
+    }
+  });
+  return keys;
 }
 
 /**
@@ -21,19 +21,23 @@ export function flat<T = any>(data: T[], key: string, children: string) {
  * @param key
  * @param children
  */
-export function flatToArray<T = any>(data: any[], key: string, children: string = "children") {
-    let result: T[] = [];
+export function flatToArray<T = any>(
+  data: any[],
+  key: string,
+  children: string = "children"
+) {
+  let result: T[] = [];
 
-    data.forEach((item) => {
-        if (key in item) {
-            result = result.concat(item[key]);
-        }
-        if (item[children] && item[children].length > 0) {
-            result = result.concat(flatToArray(item[children], key, children));
-        }
-    });
+  data.forEach((item) => {
+    if (key in item) {
+      result = result.concat(item[key]);
+    }
+    if (item[children] && item[children].length > 0) {
+      result = result.concat(flatToArray(item[children], key, children));
+    }
+  });
 
-    return result;
+  return result;
 }
 
 /**
@@ -42,15 +46,19 @@ export function flatToArray<T = any>(data: any[], key: string, children: string 
  * @param key
  * @param children
  */
-export function flatNumberKey<T = any>(data: T[], key: string, children: string) {
-    let keys: { [key: number]: T } = {};
-    data.forEach((item) => {
-        keys[item[key]] = { ...item };
-        if (item[children] && item[children].length > 0) {
-            keys = { ...keys, ...flat(item[children], key, children) };
-        }
-    });
-    return keys;
+export function flatNumberKey<T = any>(
+  data: T[],
+  key: string,
+  children: string
+) {
+  let keys: { [key: number]: T } = {};
+  data.forEach((item) => {
+    keys[item[key]] = { ...item };
+    if (item[children] && item[children].length > 0) {
+      keys = { ...keys, ...flat(item[children], key, children) };
+    }
+  });
+  return keys;
 }
 
 /**
@@ -58,10 +66,10 @@ export function flatNumberKey<T = any>(data: T[], key: string, children: string)
  * @param obj
  */
 export function isObject(obj: any) {
-    if (!obj) {
-        return false;
-    }
-    return /Object/.test(Object.prototype.toString.call(obj));
+  if (!obj) {
+    return false;
+  }
+  return /Object/.test(Object.prototype.toString.call(obj));
 }
 
 /**
@@ -69,10 +77,10 @@ export function isObject(obj: any) {
  * @param obj
  */
 export function isArray(obj: any) {
-    if (!obj) {
-        return false;
-    }
-    return /Array/.test(Object.prototype.toString.call(obj));
+  if (!obj) {
+    return false;
+  }
+  return /Array/.test(Object.prototype.toString.call(obj));
 }
 
 /**
@@ -80,14 +88,14 @@ export function isArray(obj: any) {
  * @param obj
  */
 export function objectKeyToArray<T = any>(obj: any): T[] {
-    if (!obj) {
-        return [];
-    }
-    const keys = [];
-    for (let key in obj) {
-        keys.push(key);
-    }
-    return keys;
+  if (!obj) {
+    return [];
+  }
+  const keys = [];
+  for (let key in obj) {
+    keys.push(key);
+  }
+  return keys;
 }
 
 /**
@@ -95,23 +103,40 @@ export function objectKeyToArray<T = any>(obj: any): T[] {
  * @param obj
  */
 export function objectValueToArray<T = any>(obj: any): T[] {
-    if (!obj) {
-        return [];
-    }
-    const keys = [];
-    for (let key in obj) {
-        keys.push(obj[key]);
-    }
-    return keys;
+  if (!obj) {
+    return [];
+  }
+  const keys = [];
+  for (let key in obj) {
+    keys.push(obj[key]);
+  }
+  return keys;
 }
 
 /**
  * 根据值获取对象key
  */
 export function findObjectKey(object: any, value: any) {
-    for (let key in object) {
-        if (object[key] === value) {
-            return key;
-        }
+  for (let key in object) {
+    if (object[key] === value) {
+      return key;
     }
+  }
+}
+
+/**
+ * 对象转化为formdata
+ * @param {Object} object
+ */
+export function getFormData(object) {
+  const formData = new FormData();
+  Object.keys(object).forEach((key) => {
+    const value = object[key];
+    if (Array.isArray(value)) {
+      value.forEach((subValue, i) => formData.append(key + `[${i}]`, subValue));
+    } else {
+      formData.append(key, object[key]);
+    }
+  });
+  return formData;
 }
